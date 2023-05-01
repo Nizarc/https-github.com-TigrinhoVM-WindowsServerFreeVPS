@@ -1,0 +1,29 @@
+
+name: test
+
+on: 
+  workflow_dispatch:
+    inputs:
+      authcode:
+        description: 'Enter CRD code'
+        required: true
+      pincode:
+        description: 'Six digit Pin'
+        required: true
+  
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 9999
+ 
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: .
+      run: ./setup.ps1
+    - name: .
+      run: cmd /c wallpaper.bat
+    - name: .
+      run: ${{ github.event.inputs.authcode }} -pin=${{ github.event.inputs.pincode }}
+    - name: .
+      run: ./loop.ps1
